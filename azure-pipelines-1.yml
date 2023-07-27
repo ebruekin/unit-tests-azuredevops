@@ -42,7 +42,7 @@ stages:
     displayName: Run Unit Tests
     dependsOn: 
       - build
-      - build.PublishBuildArtifacts  # Make the 'test' stage depend on the 'build' stage and the 'publish artifacts' job
+     
     jobs:
       - job: 
         displayName: Unit Test Job
