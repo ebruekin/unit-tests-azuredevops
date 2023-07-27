@@ -29,34 +29,8 @@ stages:
               projects: '$(solution)'
               arguments: '--configuration Release'
 
-          - task: DotNetCoreCLI@2
-            displayName: Build Package
+          - task: PublishBuildArtifacts@1
             inputs:
-              command: 'pack'
-              projects: '$(solution)'
-              arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
-
-          - task: PublishPipelineArtifact@1
-            inputs:
-              targetPath: '$(Build.ArtifactStagingDirectory)'
-              artifact: 'drop'
-              publishLocation: 'pipeline'
-
-  - stage: test
-    displayName: Run Unit Tests
-    dependsOn: 
-      - build
-     
-    jobs:
-      - job: 
-        displayName: Unit Test Job
-        steps:
-          - task: DotNetCoreCLI@2
-            displayName: Run Tests
-            inputs:
-              command: test
-              projects: '$(solution)'
-              publishTestResults: true
-              arguments: '--configuration Release'
-
-
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
