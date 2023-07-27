@@ -29,10 +29,15 @@ stages:
               projects: '$(solution)'
               arguments: '--configuration Release'
 
+          # - task: PublishPipelineArtifact@1
+          #   inputs:
+          #     targetPath: '$(build.ArtifactStagingDirectory)'
+          #     artifact: 'drop'
+          #     publishLocation: 'pipeline'
           - task: PublishPipelineArtifact@1
             inputs:
               targetPath: '$(build.ArtifactStagingDirectory)'
-              artifact: 'drop'
+              artifact: 'build-artifact'  # Değiştirilen ad
               publishLocation: 'pipeline'
 
   - stage: deployapp  
@@ -46,8 +51,9 @@ stages:
           - task: DownloadPipelineArtifact@2
             inputs:
               buildType: 'current'
-              artifactName: 'drop'
+              artifactName: 'build-artifact'  # Değiştirilen ad
               targetPath: '$(Pipeline.Workspace)/drop'
+
           - task: AzureRmWebAppDeployment@4
             inputs:
               ConnectionType: 'AzureRM'
