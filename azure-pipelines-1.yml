@@ -23,6 +23,12 @@ stages:
               includePreviewVersions: true
 
           - task: DotNetCoreCLI@2
+            displayName: Restore NuGet packages
+            inputs:
+              command: 'restore'
+              projects: '$(solution)'
+
+          - task: DotNetCoreCLI@2
             displayName: Build .NET application
             inputs:
               command: 'build'
@@ -30,14 +36,18 @@ stages:
               arguments: '--configuration Release'
 
           - task: DotNetCoreCLI@2
-            displayName: Build Package
+            displayName: Publish .NET application
             inputs:
-              command: 'pack'
+              command: 'publish'
               projects: '$(solution)'
+              publishWebProjects: True
               arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
 
-          - task: PublishBuildArtifacts@1
+          - task: ArchiveFiles@2
+            displayName: Create ZIP Artifact
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              ArtifactName: 'drop'
-              publishLocation: 'Container'
+              rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/WebApp.zip'
+              replaceExistingArchive: true
