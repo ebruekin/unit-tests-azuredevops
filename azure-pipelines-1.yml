@@ -11,10 +11,10 @@ variables:
 
 stages:
   - stage: build
-    displayName: build application
+    displayName: Build Application
     jobs:
-      - job:
-        displayName: build job
+      - job: 
+        displayName: Build Job
         steps:
           - task: UseDotNet@2
             displayName: Use .NET6 to build
@@ -29,64 +29,32 @@ stages:
               projects: '$(solution)'
               arguments: '--configuration Release'
 
-          # - task: PublishPipelineArtifact@1
-          #   inputs:
-          #     targetPath: '$(build.ArtifactStagingDirectory)'
-          #     artifact: 'drop'
-          #     publishLocation: 'pipeline'
-          - task: PublishPipelineArtifact@1
-            inputs:
-              targetPath: '$(build.ArtifactStagingDirectory)'
-              artifact: 'build-artifact'  # Değiştirilen ad
-              publishLocation: 'pipeline'
-
-  - stage: deployapp  
-    displayName: Deploy  
-    dependsOn: build  # Deploy işlemi builde bağlı
-    condition: succeeded('build')  # build aşaması başarılı olursa deploy aşamasını çalıştır
-    jobs:
-      - job:
-        displayName: trying to deploy
+      - job: 
+        displayName: Publish Build Artifacts
         steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              buildType: 'current'
-              artifactName: 'build-artifact'  # Değiştirilen ad
-              targetPath: '$(Pipeline.Workspace)/drop'
-
-          - task: AzureRmWebAppDeployment@4
-            inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: 'Azure for Students(49f57a7e-fb32-4222-8760-e1ec1a6765db)'
-              appType: 'webApp'
-              WebAppName: 'WebApp1997'
-              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
-  - stage: test
-    displayName: run unit test
-    jobs:
-      - job:
-        displayName: unit test job
-        steps:
-          - task: DotNetCoreCLI@2
-            displayName: run tests
-            inputs:
-              command: test
-              projects: '$(solution)'
-              publishTestResults: true
-              arguments: '--configuration Release'
-
           - task: PublishPipelineArtifact@1
             inputs:
               targetPath: '$(build.ArtifactStagingDirectory)'
               artifact: 'drop'
               publishLocation: 'pipeline'
 
+  - stage: test
+    displayName: Run Unit Tests
+    dependsOn: 
+      - build
+      - build.PublishBuildArtifacts  # Make the 'test' stage depend on the 'build' stage and the 'publish artifacts' job
+    jobs:
+      - job: 
+        displayName: Unit Test Job
+        steps:
+          - task: DotNetCoreCLI@2
+            displayName: Run Tests
+            inputs:
+              command: test
+              projects: '$(solution)'
+              publishTestResults: true
+              arguments: '--configuration Release'
 
-        
-
-    
-    
 
 
 
