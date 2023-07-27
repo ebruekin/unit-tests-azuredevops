@@ -42,7 +42,25 @@ stages:
               projects: '$(solution)'
               arguments: '--configuration Release'
 
-
+  - stage:
+    displayName: deploy application
+    condition: succeeded('run unit test')
+    jobs:
+      - deployment: deployJob
+        displayName: Deploy to Azure App Service
+        environment: 'dep'  # Replace with your Azure App Service environment name
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureWebApp@1
+                  displayName: 'Azure App Service Deploy'
+                  inputs:
+                    azureSubscription: '49f57a7e-fb32-4222-8760-e1ec1a6765db'  # Replace with your Azure subscription name
+                    appType: 'webApp'
+                    appName: 'WebApp1997'  # Replace with your Azure App Service name
+                    package: '$(Pipeline.Workspace)/**/*.zip'
+                    deploymentMethod: 'auto'
 
         
 
