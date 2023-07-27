@@ -37,6 +37,8 @@ stages:
 
   - stage: deployapp  
     displayName: Deploy  
+    dependsOn: build  # Deploy işlemi builde bağlı
+    condition: succeeded('build')  # build aşaması başarılı olursa deploy aşamasını çalıştır
     jobs:
       - job:
         displayName: trying to deploy
