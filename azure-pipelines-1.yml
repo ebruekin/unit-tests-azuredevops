@@ -10,20 +10,18 @@ variables:
   solution: '**/*.sln'
 
 stages:
-
   - stage: build
     displayName: build application
     jobs:
       - job:
         displayName: build job
         steps:
-
           - task: UseDotNet@2
             displayName: Use .NET6 to build
             inputs:
               version: "6.0.x"
               includePreviewVersions: true
-              
+
           - task: DotNetCoreCLI@2
             displayName: Build .NET application
             inputs:
@@ -37,6 +35,17 @@ stages:
               artifact: 'drop'
               publishLocation: 'pipeline'
 
+  - stage: deploy-app  
+    displayName: Deploy  
+    jobs:
+      - job:
+        displayName: trying to deploy
+        steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              artifactName: 'drop'
+              targetPath: '$(Pipeline.Workspace)/drop'
 
   - stage: test
     displayName: run unit test
@@ -57,8 +66,6 @@ stages:
               targetPath: '$(build.ArtifactStagingDirectory)'
               artifact: 'drop'
               publishLocation: 'pipeline'
-
-
 
 
         
