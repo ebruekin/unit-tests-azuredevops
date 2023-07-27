@@ -29,12 +29,16 @@ stages:
               projects: '$(solution)'
               arguments: '--configuration Release'
 
-      - job: 
-        displayName: Publish Build Artifacts
-        steps:
+          - task: DotNetCoreCLI@2
+            displayName: Build Package
+            inputs:
+              command: 'pack'
+              projects: '$(solution)'
+              arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+
           - task: PublishPipelineArtifact@1
             inputs:
-              targetPath: '$(build.ArtifactStagingDirectory)'
+              targetPath: '$(Build.ArtifactStagingDirectory)'
               artifact: 'drop'
               publishLocation: 'pipeline'
 
@@ -54,8 +58,5 @@ stages:
               projects: '$(solution)'
               publishTestResults: true
               arguments: '--configuration Release'
-
-
-
 
 
