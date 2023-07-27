@@ -8,8 +8,6 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
 
 stages:
   - stage:
@@ -23,11 +21,12 @@ stages:
             inputs:
               version: "6.0.x"
               includePreviewVersions: true
-          - task: VSBuild@1
-            displayName: Build Visual Studio project
+          - task: DotNetCoreCLI@2
+            displayName: Build .NET application
             inputs:
-              solution: '$(solution)'
-              msbuildArgs: '/p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform)'
+              command: 'build'
+              projects: '$(solution)'
+              arguments: '--configuration Release'
 
 
 
