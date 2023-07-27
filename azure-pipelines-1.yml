@@ -1,0 +1,41 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+stages:
+  - stage:
+    displayName: build application
+    jobs:
+      - job:
+        displayName: build job
+        steps:
+          - task: UseDotNet@2
+            displayName: Use .NET6 to build
+            inputs:
+              version: "6.0.x"
+              includePreviewVersions: true
+          - task: VSBuild@1
+            displayName: Build Visual Studio project
+            inputs:
+              solution: '$(solution)'
+              msbuildArgs: '/p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform)'
+
+
+
+        
+
+    
+    
+
+
+
+
