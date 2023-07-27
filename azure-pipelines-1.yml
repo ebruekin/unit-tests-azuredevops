@@ -35,7 +35,7 @@ stages:
               artifact: 'drop'
               publishLocation: 'pipeline'
 
-  - stage: deploy-app  
+  - stage: deployapp  
     displayName: Deploy  
     jobs:
       - job:
