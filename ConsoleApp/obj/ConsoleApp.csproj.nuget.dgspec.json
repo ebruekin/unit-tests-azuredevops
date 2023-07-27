@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj": {}
+    "d:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj": {}
   },
   "projects": {
-    "D:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj": {
+    "d:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj",
+        "projectUniqueName": "d:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj",
         "projectName": "ConsoleApp",
-        "projectPath": "D:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj",
+        "projectPath": "d:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj",
         "packagesPath": "C:\\Users\\sanel\\.nuget\\packages\\",
-        "outputPath": "D:\\unit-tests-azuredevops\\ConsoleApp\\obj\\",
+        "outputPath": "d:\\unit-tests-azuredevops\\ConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sanel\\AppData\\Roaming\\NuGet\\NuGet.Config",

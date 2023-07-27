@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GExULDKO4cd/j9plOt5vd/ALlaMs7m5uC4SkPWKq74R9LUnMGZLo2lqE/hkRu9zdKD8EqpbI52XVtK2yWuQY3w==",
+  "dgSpecHash": "ARgiJ3R9dwSKmPCTGT7cHPNkH+tH0A0RVz9Gg3WB/ZzCXMcQBgZ7ZXU4fqC34usbfQUxZpxh1Y5I5236miRQCQ==",
   "success": true,
-  "projectFilePath": "D:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj",
+  "projectFilePath": "d:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -6353,11 +6353,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\unit-tests-azuredevops\\TestProject1\\TestProject1.csproj",
+      "projectUniqueName": "d:\\unit-tests-azuredevops\\TestProject1\\TestProject1.csproj",
       "projectName": "TestProject1",
-      "projectPath": "D:\\unit-tests-azuredevops\\TestProject1\\TestProject1.csproj",
+      "projectPath": "d:\\unit-tests-azuredevops\\TestProject1\\TestProject1.csproj",
       "packagesPath": "C:\\Users\\sanel\\.nuget\\packages\\",
-      "outputPath": "D:\\unit-tests-azuredevops\\TestProject1\\obj\\",
+      "outputPath": "d:\\unit-tests-azuredevops\\TestProject1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sanel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6374,8 +6374,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj": {
-              "projectPath": "D:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj"
+            "d:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj": {
+              "projectPath": "d:\\unit-tests-azuredevops\\ConsoleApp\\ConsoleApp.csproj"
             }
           }
         }

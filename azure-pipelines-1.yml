@@ -11,7 +11,7 @@ variables:
 
 stages:
 
-  - stage:
+  - stage: build
     displayName: build application
     jobs:
       - job:
@@ -29,7 +29,7 @@ stages:
               projects: '$(solution)'
               arguments: '--configuration Release'
 
-  - stage:
+  - stage: test
     displayName: run unit test
     jobs:
       - job:
@@ -40,26 +40,16 @@ stages:
             inputs:
               command: test
               projects: '$(solution)'
+              publishTestResults: true
               arguments: '--configuration Release'
 
-  - stage:
-    displayName: deploy application
-    condition: succeeded('run unit test')
-    jobs:
-      - deployment: deployJob
-        displayName: Deploy to Azure App Service
-        environment: 'dep'  # Replace with your Azure App Service environment name
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-              - task: AzureRmWebAppDeployment@4
-                inputs:
-                  ConnectionType: 'AzureRM'
-                  azureSubscription: 'Azure for Students(49f57a7e-fb32-4222-8760-e1ec1a6765db)'
-                  appType: 'webApp'
-                  WebAppName: 'WebApp1997'
-                  packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+          - task: PublishPipelineArtifacts@1
+            targetPath: '$(buil.ArtifactStagingDirectory)
+            artifact: 'drop'
+            publisLocation: 'pipeline'
+
+ 
+
 
 
         
