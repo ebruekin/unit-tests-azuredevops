@@ -10,6 +10,7 @@ variables:
   solution: '**/*.sln'
 
 stages:
+
   - stage:
     displayName: build application
     jobs:
@@ -25,6 +26,19 @@ stages:
             displayName: Build .NET application
             inputs:
               command: 'build'
+              projects: '$(solution)'
+              arguments: '--configuration Release'
+
+  - stage:
+    displayName: run unit test
+    jobs:
+      - job:
+        displayName: unit test job
+        steps:
+          - task: DotNetCoreCLI@2
+            displayName: run tests
+            inputs:
+              command: test
               projects: '$(solution)'
               arguments: '--configuration Release'
 
