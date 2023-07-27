@@ -17,17 +17,26 @@ stages:
       - job:
         displayName: build job
         steps:
+
           - task: UseDotNet@2
             displayName: Use .NET6 to build
             inputs:
               version: "6.0.x"
               includePreviewVersions: true
+              
           - task: DotNetCoreCLI@2
             displayName: Build .NET application
             inputs:
               command: 'build'
               projects: '$(solution)'
               arguments: '--configuration Release'
+
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: '$(build.ArtifactStagingDirectory)'
+              artifact: 'drop'
+              publishLocation: 'pipeline'
+
 
   - stage: test
     displayName: run unit test
