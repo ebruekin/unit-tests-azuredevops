@@ -46,6 +46,13 @@ stages:
               buildType: 'current'
               artifactName: 'drop'
               targetPath: '$(Pipeline.Workspace)/drop'
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Azure for Students(49f57a7e-fb32-4222-8760-e1ec1a6765db)'
+              appType: 'webApp'
+              WebAppName: 'WebApp1997'
+              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
   - stage: test
     displayName: run unit test
