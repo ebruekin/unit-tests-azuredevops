@@ -43,8 +43,6 @@ stages:
               publishLocation: 'pipeline'
   - stage: deploy
     displayName: deployment
-    dependsOn:
-      - buid
     jobs: 
       - job:
         displayName: trying to deploy
@@ -60,9 +58,7 @@ stages:
       
   - stage: test
     displayName: Run Unit Tests
-    dependsOn: 
-      - build
-     
+    
     jobs:
       - job: 
         displayName: Unit Test Job
